@@ -13,17 +13,19 @@ export const runtime = 'edge';
 
 export async function POST(req: Request) {
   // Extract the `prompt` from the body of the request
-  const { messages } = await req.json();
+  
+  const { subject, difficulty, messages} = await req.json();
 
+  
   // Ask OpenAI for a streaming chat completion given the prompt
   const response = await openai.chat.completions.create({
     model: 'gpt-3.5-turbo',
     stream: true,
-    messages: [{ role: "system", content: "you are a professional interviewer hiring for a role of frontend developer, you will ask one question, user will answer it, judge it and give review of each answer by user and at the end of interview review the entire thing. It will be technical interview." },
+    messages: [{ role: "system", content: `you are a professional interviewer. Ask the interviewee which subject he/she wants to interview for and also difficulty level.Then you will ask one question, user will answer it, judge it and give review of each answer by user and the total number of questions is 5, at the end of interview review the entire thing. It will be technical interview.` },
               { role: "assistant", content:"Are you ready"},
               {role:"user", content:"Hello"}, ...messages],
-  });
-
+});
+  
   // Convert the response into a friendly text-stream
   const stream = OpenAIStream(response);
   // Respond with the stream
