@@ -68,21 +68,21 @@ export default function Chat() {
             onChange={handleInputChange}
           />
         <div className="flex items-center justify-center gap-20">
-          <p>Microphone: {listening? "on":"off"}</p>
+          <p className="text-green-500">Microphone: {listening? "on":"off"}</p>
         
         <button onClick={SpeechRecognition.startListening}><FontAwesomeIcon icon={faMicrophone} className="bg-green-400 p-2 rounded"/></button>
         <button onClick={SpeechRecognition.stopListening}><FontAwesomeIcon icon={faMicrophoneSlash} className="bg-green-400 rounded p-2"/></button>
-        <button onClick={resetTranscript}>Reset</button>
+        <button className="text-green-500" onClick={resetTranscript}>Reset</button>
         
         </div>
         {listening?(
           <div>
       <input className="text-black w-full border h-12 border-white my-6 rounded-lg" value={transcript} ref={textInputRef}/>
-      <button className="flex mx-auto text-xl font-bold bg-blue-400 rounded-lg px-6 py-2" onClick={handleCopyClick}>Copy</button>
+      <button className="flex mx-auto text-xl font-bold bg-green-500 rounded-lg px-6 py-2" onClick={handleCopyClick}>Copy</button>
       </div>)
       :null}</form>
       <div>
-        <button className="bg-blue-400 p-2 absolute top-4 right-4 rounded" onClick={Logout}>Logout</button></div>
+        <button className="bg-green-500 p-2 absolute top-4 right-4 rounded" onClick={Logout}>Logout</button></div>
     </div>
   );
 }

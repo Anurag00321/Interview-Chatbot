@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { auth, provider } from "./utils/firebase";
 import { signInWithPopup } from "firebase/auth";
+import Image from "next/image";
 import Chat from "./Interview/page";
 
 function Auth() {
@@ -22,8 +23,8 @@ function Auth() {
         <Chat />
       ) : (
         <div className="flex bg-white">
-          <div className="w-3/5 h-screen border-r text-center text-3xl font-bold text-black border-black">
-            Interview AI Chatbot
+          <div className="w-3/5 h-screen border-r text-center top-1/2 text-3xl font-bold text-black border-black">
+            <p className="mt-60">Interview AI Chatbot</p>
           </div>
           <div className="flex m-auto">
             <div className="border border-black w-60 h-44 bg-white rounded">
