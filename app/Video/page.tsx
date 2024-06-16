@@ -7,7 +7,7 @@ const FaceRecognition: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const setupCamera = async () => {
+    const setupCamera = async (): Promise<HTMLVideoElement | null> => {
       if (videoRef.current) {
         const video = videoRef.current;
 
@@ -20,12 +20,13 @@ const FaceRecognition: React.FC = () => {
           };
         });
       }
+      return null;
     };
 
     const loadFaceAPI = async () => {
-        const modelsPath = '/models';
+      const modelsPath = '/models';
       await faceapi.nets.tinyFaceDetector.loadFromUri(`${modelsPath}/tiny_face_detector_model-weights_manifest.json`);
-      await faceapi.nets.faceLandmark68Net.loadFromUri(`${modelsPath}/face_landmark_68_model-weights_manifest.jso`);
+      await faceapi.nets.faceLandmark68Net.loadFromUri(`${modelsPath}/face_landmark_68_model-weights_manifest.json`);
       await faceapi.nets.faceExpressionNet.loadFromUri(`${modelsPath}/face_expression_model-weights_manifest.json`);
     };
 
@@ -52,9 +53,11 @@ const FaceRecognition: React.FC = () => {
 
     const main = async () => {
       const video = await setupCamera();
-      await loadFaceAPI();
-      video.play();
-      detectExpressions(video);
+      if (video) {
+        await loadFaceAPI();
+        video.play();
+        detectExpressions(video);
+      }
     };
 
     main();
