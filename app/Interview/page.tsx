@@ -44,6 +44,9 @@ export default function Chat() {
     window.location.reload()
   }
 
+  const handleButtonClick = () => {
+    SpeechRecognition.startListening();
+  };
 
   return (
     <div className="flex flex-col mx-auto h-full stretch w-2/3 rounded-lg">
@@ -72,7 +75,7 @@ export default function Chat() {
         <div className="flex items-center justify-center gap-20">
           <p className="text-green-500">Microphone: {listening? "on":"off"}</p>
         
-        <button onClick={SpeechRecognition.startListening}><FontAwesomeIcon icon={faMicrophone} className="bg-green-400 p-2 rounded"/></button>
+        <button onClick={handleButtonClick}><FontAwesomeIcon icon={faMicrophone} className="bg-green-400 p-2 rounded"/></button>
         <button onClick={SpeechRecognition.stopListening}><FontAwesomeIcon icon={faMicrophoneSlash} className="bg-green-400 rounded p-2"/></button>
         <button className="text-green-500" onClick={resetTranscript}>Reset</button>
         
