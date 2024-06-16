@@ -22,15 +22,17 @@ export default function Chat() {
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
 
-  const textInputRef = useRef(null);
+  const textInputRef = useRef<HTMLInputElement>(null);
 
   const handleCopyClick = () => {
-    // Select the text inside the input field
-    textInputRef.current.select();
-    // Execute the copy command
-    document.execCommand('copy');
-    // Deselect the input field
-    window.getSelection().removeAllRanges();
+    if (textInputRef.current) {
+      // Select the text inside the input field
+      textInputRef.current.select();
+      // Execute the copy command
+      document.execCommand('copy');
+      // Deselect the input field
+      textInputRef.current.blur();
+    
   };
 
     if (!browserSupportsSpeechRecognition) {
@@ -86,5 +88,5 @@ export default function Chat() {
     </div>
   );
 }
-
+}
 
